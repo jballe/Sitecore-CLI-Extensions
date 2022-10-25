@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<AssemblyName>SitecoreCli.DevEx.Extensions.$(MSBuildProjectName)</AssemblyName>
+		<RootNamespace>SitecoreCliExtensions.$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
+
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<PackageLicenseExpression>LGPL-3.0-or-later</PackageLicenseExpression>
+	</PropertyGroup>
+	<PropertyGroup>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<PackageId>$(AssemblyName)</PackageId>
+		<Title>Sitecore CLI extension for timeregistration with Clockify</Title>
+		<Description>Nice package</Description>
+		<VersionPrefix>1.0.0.2</VersionPrefix>
+		<PackageOutputPath>..\..\..\out\nuget</PackageOutputPath>
+		<IconUrl>https://mygetwwwsitecoreeu.blob.core.windows.net/feedicons/sc-packages.png</IconUrl>
+	</PropertyGroup>
+	<PropertyGroup>
+		<IncludeBuildOutput>false</IncludeBuildOutput>
+		<NoWarn>NU5100</NoWarn>
+	</PropertyGroup>
+
+	<!--https://docs.microsoft.com/en-au/nuget/reference/msbuild-targets#including-content-in-a-package -->
+	<PropertyGroup>
+		<TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);CustomBuildOutputTarget</TargetsForTfmSpecificContentInPackage>
+	</PropertyGroup>
+	<Target Name="CustomBuildOutputTarget">
+		<ItemGroup>
+			<TfmSpecificPackageFile Include="$(OutputPath)$(AssemblyName).dll">
+				<PackagePath>plugin</PackagePath>
+			</TfmSpecificPackageFile>
+		</ItemGroup>
+	</Target>
+	<ItemGroup>
+	  <PackageReference Include="Sitecore.Devex.Client.Cli.Extensibility" Version="4.2.1" />
+	</ItemGroup>
+
+</Project>
